@@ -33,6 +33,11 @@ run sudo apt-get install git
 installDeb "Chrome" https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 installDeb "GitKraken" https://release.gitkraken.com/linux/gitkraken-amd64.deb
 
+log "Installing Grub Customizer"
+run sudo add-apt-repository ppa:danielrichter2007/grub-customizer
+run sudo apt-get update
+run sudo apt-get install grub-customizer
+
 log "Download and install nvm"
 curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 
@@ -72,3 +77,35 @@ run sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/doc
 run sudo chmod +x /usr/local/bin/docker-compose
 run sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
+log "Installing OpenJDK 8"
+run sudo apt install openjdk-8-jdk
+run echo 'export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")' >> ~/.profile
+run sudo update-java-alternatives --set java-1.8.0-openjdk-amd64
+run source ~/.profile
+
+log "Installing Android SDK"
+run mkdir -p ~/Android/Sdk
+run wget -O ~/Android/Sdk/android-sdk.zip "https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip"
+run unzip ~/Android/Sdk/android-sdk.zip -d ~/Android/Sdk
+run rm ~/Android/Sdk/android-sdk.zip
+run mv ~/Android/Sdk/tools/emulator ~/Android/Sdk/tools/emulator2
+run echo 'export ANDROID_HOME=$HOME/Android/Sdk' >> ~/.profile
+run echo 'export ANDROID_SDK_ROOT=$ANDROID_HOME' >> ~/.profile
+run echo 'export PATH=$PATH:$ANDROID_HOME/tools' >> ~/.profile
+run echo 'export PATH=$PATH:$ANDROID_HOME/tools/bin' >> ~/.profile
+run source ~/.profile
+run touch ~/.android/repositories.cfg
+
+run sdkmanager --install "platform-tools"
+run sdkmanager --install "build-tools;29.0.2"
+run sdkmanager --install "extras;google;google_play_services"
+run sdkmanager --install "system-images;android-28;google_apis_playstore;x86_64"
+
+# create android VMs android-small and @android-large
+run avdmanager create avd -n "android-small" -k "system-images;android-28;google_apis_playstore;x86_64"
+
+
+log "Installing Android SDK emulator"
+run sdkmanager --install emulator
+run echo 'export PATH=$PATH:$ANDROID_HOME/emulator' >> ~/.profile
+run source ~/.profile
