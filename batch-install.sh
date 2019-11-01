@@ -79,6 +79,7 @@ code --install-extension oderwat.indent-rainbow
 code --install-extension johnpapa.angular2
 code --install-extension vscode-icons-team.vscode-icons
 code --install-extension alefragnani.project-manager
+code --install-extension johnpapa.angular-essentials
 
 
 log "Increase the amount of inotify watchers"
