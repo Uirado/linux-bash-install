@@ -24,6 +24,9 @@ installDeb () {
 log "Update apt-get repositories"
 sudo apt update
 
+log "Set linux to use local time"
+timedatectl set-local-rtc 1 --adjust-system-clock
+
 
 installLog "Git"
 mkdir -p ~/git
