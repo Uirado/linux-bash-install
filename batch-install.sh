@@ -42,7 +42,7 @@ installDeb "GitKraken" https://release.gitkraken.com/linux/gitkraken-amd64.deb
 log "Grub Customizer"
 sudo add-apt-repository ppa:danielrichter2007/grub-customizer -y
 sudo apt-get update
-sudo apt-get install grub-customizer -s
+sudo apt-get install grub-customizer
 
 
 installLog "nvm"
