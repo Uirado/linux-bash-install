@@ -63,13 +63,13 @@ installLog "Cordova"
 npm install -g cordova
 
 
-installDeb ".NET Core" https://packages.microsoft.com/config/ubuntu/19.04/packages-microsoft-prod.deb
-sudo apt-get install apt-transport-https -s
-sudo apt-get update
-sudo apt-get install dotnet-sdk-2.2=2.2.108-1 -s
+# installDeb ".NET Core" https://packages.microsoft.com/config/ubuntu/19.04/packages-microsoft-prod.deb
+# sudo apt-get install apt-transport-https -s
+# sudo apt-get update
+# sudo apt-get install dotnet-sdk-2.2=2.2.108-1 -s
 
 
-installDeb "Visual Studio Code" https://az764295.vo.msecnd.net/stable/f06011ac164ae4dc8e753a3fe7f9549844d15e35/code_1.37.1-1565886362_amd64.deb
+installDeb "Visual Studio Code" https://az764295.vo.msecnd.net/stable/8795a9889db74563ddd43eb0a897a2384129a619/code_1.40.1-1573664190_amd64.deb
 
 
 installLog "Visual Studio Code extensions"
@@ -100,6 +100,9 @@ echo 'export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")' >> ~/.
 sudo update-java-alternatives --set java-1.8.0-openjdk-amd64
 . ~/.profile
 
+sudo apt update
+sudo apt upgrade
+
 
 installLog "Android SDK"
 mkdir -p ~/Android/Sdk
@@ -128,6 +131,6 @@ echo 'export PATH=$PATH:$ANDROID_HOME/emulator' >> ~/.profile
 
 
 # create android VMs android-small and @android-large
-log "Create Android virtual devices"
-avdmanager create avd -n "android-small" -k "system-images;android-28;google_apis_playstore;x86_64"
-avdmanager create avd -n "android-small" -k "system-images;android-28;google_apis_playstore;x86_64" -d "Nexus S" -c 512
+# log "Create Android virtual devices"
+# avdmanager create avd -n "android-small" -k "system-images;android-28;google_apis_playstore;x86_64"
+# avdmanager create avd -n "android-small" -k "system-images;android-28;google_apis_playstore;x86_64" -d "Nexus S" -c 512
