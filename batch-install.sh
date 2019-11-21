@@ -30,7 +30,7 @@ timedatectl set-local-rtc 1 --adjust-system-clock
 
 installLog "Git"
 mkdir -p ~/git
-sudo apt-get install git -s
+sudo apt-get install git --yes
 
 
 installDeb "Chrome" https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
@@ -42,7 +42,7 @@ installDeb "GitKraken" https://release.gitkraken.com/linux/gitkraken-amd64.deb
 log "Grub Customizer"
 sudo add-apt-repository ppa:danielrichter2007/grub-customizer -y
 sudo apt-get update
-sudo apt-get install grub-customizer
+sudo apt-get install grub-customizer --yes
 
 
 installLog "nvm"
@@ -64,12 +64,18 @@ npm install -g ionic
 
 installLog "Cordova"
 npm install -g cordova
+npm install -g native-run
+
+
+installLog "Script utils"
+sudo apt install libxml2-utils
+sudo apt install zipalign --yes
 
 
 # installDeb ".NET Core" https://packages.microsoft.com/config/ubuntu/19.04/packages-microsoft-prod.deb
-# sudo apt-get install apt-transport-https -s
+# sudo apt-get install apt-transport-https ---yes
 # sudo apt-get update
-# sudo apt-get install dotnet-sdk-2.2=2.2.108-1 -s
+# sudo apt-get install dotnet-sdk-2.2=2.2.108-1 --yes
 
 
 installDeb "Visual Studio Code" https://az764295.vo.msecnd.net/stable/8795a9889db74563ddd43eb0a897a2384129a619/code_1.40.1-1573664190_amd64.deb
@@ -91,14 +97,14 @@ sudo sysctl -p
 
 
 installLog "Docker and Docker Compose"
-sudo apt install -y docker.io -s
+sudo apt install -y docker.io --yes
 sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
 
 installLog "OpenJDK 8"
-sudo apt install openjdk-8-jdk -y
+sudo apt install openjdk-8-jdk -yes
 echo 'export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")' >> ~/.profile
 sudo update-java-alternatives --set java-1.8.0-openjdk-amd64
 . ~/.profile
@@ -113,10 +119,17 @@ wget -O ~/Android/Sdk/android-sdk.zip "https://dl.google.com/android/repository/
 unzip -o -qq ~/Android/Sdk/android-sdk.zip -d ~/Android/Sdk
 rm ~/Android/Sdk/android-sdk.zip
 mv ~/Android/Sdk/tools/emulator ~/Android/Sdk/tools/emulator2
+
+wget -O ~/gradle-4.10.3.zip https://downloads.gradle-dn.com/distributions/gradle-4.10.3-all.zip
+unzip -o -qq ~/gradle-4.10.3.zip -d ~/
+
+echo 'export GRADLE_HOME=$HOME/gradle-4.10.3' >> ~/.profile
 echo 'export ANDROID_HOME=$HOME/Android/Sdk' >> ~/.profile
 echo 'export ANDROID_SDK_ROOT=$ANDROID_HOME' >> ~/.profile
 echo 'export PATH=$PATH:$ANDROID_HOME/tools' >> ~/.profile
 echo 'export PATH=$PATH:$ANDROID_HOME/tools/bin' >> ~/.profile
+echo 'export PATH=$PATH:$GRADLE_HOME/bin' >> ~/.profile
+
 . ~/.profile
 mkdir -p ~/.android
 touch ~/.android/repositories.cfg
