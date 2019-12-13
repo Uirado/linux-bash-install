@@ -150,3 +150,11 @@ echo 'export PATH=$PATH:$ANDROID_HOME/emulator' >> ~/.profile
 # log "Create Android virtual devices"
 # avdmanager create avd -n "android-small" -k "system-images;android-28;google_apis_playstore;x86_64"
 # avdmanager create avd -n "android-small" -k "system-images;android-28;google_apis_playstore;x86_64" -d "Nexus S" -c 512
+
+checkPortinUse(){
+    sudo lsof -Pni | grep <port number here> - check what file is running in port 
+}
+
+killPortInUse({
+    kill PID-number-Here - stop file from running in port 
+})
